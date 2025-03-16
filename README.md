@@ -9,11 +9,12 @@ I verified my implementation on a single neuron because during my work, I found 
 ## MAML Optimization
 
 MAML optimizes a model’s initial parameters such that it can adapt to new tasks with only a few gradient updates. The core idea is to minimize the loss across multiple tasks by computing gradients of gradients (i.e., second-order derivatives). The update rule for MAML is given by:
+
 $$
 \theta^* = \theta - \alpha \nabla_\theta \sum_{\mathcal{T}_i \sim p(\mathcal{T})} \mathcal{L}_{\mathcal{T}_i} \left( \theta - \beta \nabla_\theta \mathcal{L}_{\mathcal{T}_i} (\theta) \right)
 $$
 
-where: θ are the model parameters, $α$ is the meta-learning rate, $β$ is the inner-loop learning rate, $L_{T_i}$ is the loss on task $T_i$, and $p(T)$ is the distribution over tasks. The basic idea is that we are not optimizing $θ$ based on what $θ$ minimizes our loss, but rather based on what $θ’$ minimizes our loss ($θ’$ is a function of $θ$).
+where: $θ$ are the model parameters, $α$ is the meta-learning rate, $β$ is the inner-loop learning rate, $L_{T_i}$ is the loss on task $T_i$, and $p(T)$ is the distribution over tasks. The basic idea is that we are not optimizing $θ$ based on what $θ$ minimizes our loss, but rather based on what $θ’$ minimizes our loss ($θ’$ is a function of $θ$).
 
 ## My Approach to Implementing MAML
 
@@ -29,9 +30,13 @@ B[x] --> A[w=1, b=-4] -- sigmoid --> C[y]
 ```
 
 Single neuron with parameters: $w = 1$, $b = -4$
+
 Input $x = 1$, label $y = 1$ (same for both base and meta updates)
+
 Activation: sigmoid
+
 Loss: binary cross entropy
+
 Learning rate $\alpha = 1$ for inner loop
 
 ## Derivation of meta loss on a single neuron
@@ -148,7 +153,7 @@ $$
 Plugging up the numbers, we get 
 
 $$
-  (\sigma(\theta') - 1)*\sigma(\theta)(1-\sigma(\theta)) = (0.2510-1)*(1 - 2*0.0474*0.9526)
+ \frac{\partial L(\theta')}{\partial w} = (\sigma(\theta') - 1)*\sigma(\theta)(1-\sigma(\theta)) = (0.2510-1)*(1 - 2*0.0474*0.9526)
 $$
 
 $$
