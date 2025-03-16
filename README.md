@@ -11,7 +11,7 @@ I verified my implementation on a single neuron because during my work, I found 
 MAML optimizes a model’s initial parameters such that it can adapt to new tasks with only a few gradient updates. The core idea is to minimize the loss across multiple tasks by computing gradients of gradients (i.e., second-order derivatives). The update rule for MAML is given by:
 
 $$
-\theta^* = \theta - \alpha \nabla_\theta \sum_{\mathcal{T}_i \sim p(\mathcal{T})} \mathcal{L}_{\mathcal{T}_i} \left( \theta - \beta \nabla_\theta \mathcal{L}_{\mathcal{T}_i} (\theta) \right)
+\theta^* = \theta - \alpha \nabla_\theta \sum_{T_i \sim p(T)} L_{T_i} \left( \theta - \beta \nabla_\theta \mathcal{L}_{\mathcal{T}_i} (\theta) \right)
 $$
 
 where: $θ$ are the model parameters, $α$ is the meta-learning rate, $β$ is the inner-loop learning rate, $L_{T_i}$ is the loss on task $T_i$, and $p(T)$ is the distribution over tasks. The basic idea is that we are not optimizing $θ$ based on what $θ$ minimizes our loss, but rather based on what $θ’$ minimizes our loss ($θ’$ is a function of $θ$).
@@ -153,7 +153,7 @@ $$
 Plugging up the numbers, we get 
 
 $$
- \frac{\partial L(\theta')}{\partial w} = (\sigma(\theta') - 1)*\sigma(\theta)(1-\sigma(\theta)) = (0.2510-1)*(1 - 2*0.0474*0.9526)
+ \frac{\partial L(\theta')}{\partial w} = (\sigma(\theta') - 1)x\sigma(\theta)(1-\sigma(\theta)) = (0.2510-1)x(1 - 2x0.0474*0.9526)
 $$
 
 $$
