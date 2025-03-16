@@ -23,9 +23,11 @@ To ensure that my MAML implementation was correct, I first tested it on a minima
 
 ```mermaid
 graph LR
-x=1 --> A[w=1, b=-4] -- sigmoid --> y
+
+B[x] --> A[w=1, b=-4] -- sigmoid --> C[y]
 
 ```
+
 Single neuron with parameters: $w = 1$, $b = -4$
 Input $x = 1$, label $y = 1$ (same for both base and meta updates)
 Activation: sigmoid
@@ -35,6 +37,7 @@ Learning rate $\alpha = 1$ for inner loop
 ## Derivation of meta loss on a single neuron
 
 Step 1: Forward Pass (Base Model)
+
 $$
 z = wx + b = 1 \times 1 + (-4) = -3
 $$
@@ -44,6 +47,7 @@ $$
 $$
 
 Step 2: Calculate Base Loss
+
 $$
 L(\theta) = -[y \log(\sigma(z)) + (1-y)\log(1-\sigma(z))]
 $$
@@ -71,6 +75,7 @@ $$
 $$
 
 Step 4: Inner Loop Update ($\alpha = 1$)
+
 $$
 w' = w - \alpha \times \frac{\partial L}{\partial w} = 1 - (\sigma(w+b) - 1) = 2 - \sigma(w+b) = 1.9526
 $$
@@ -81,6 +86,7 @@ $$
 
 Step 5: Forward Pass with Updated Parameters (Meta Model)
 Using the same input $x = 1$:
+
 $$
 z' = w'x + b' = 1.9526 \times 1 + (-3.0474) = -1.0948
 $$
@@ -90,6 +96,7 @@ $$
 $$
 
 Step 6: Calculate Meta Loss
+
 $$
 L_{\text{meta}}(\theta') = -[y \log(\sigma(z')) + (1-y)\log(1-\sigma(z'))]
 $$
