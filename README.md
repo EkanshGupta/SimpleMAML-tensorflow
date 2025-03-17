@@ -16,7 +16,7 @@ $$
 
 where: $θ$ are the model parameters, $α$ is the meta-learning rate, $β$ is the inner-loop learning rate, $L_{T_i}$ is the loss on task $T_i$, and $p(T)$ is the distribution over tasks. The basic idea is that we are not optimizing $θ$ based on what $θ$ minimizes our loss, but rather based on what $θ’$ minimizes our loss ($θ’$ is a function of $θ$).
 
-## My Approach to Implementing MAML
+## Verifying MAML implementation on a single neuron
 
 To ensure that my MAML implementation was correct, I first tested it on a minimal architecture: a single neuron. After verifying the correctness of my implementation on this simple case, I extended it to a Convolutional Neural Network (CNN) architecture, specifically EEGNet, which is commonly used for processing EEG brain signal data. This will hopefully help people who aren’t sure if they are implementing this algorithm correctly and provide a framework for implementing MAML on any custom neural net. 
 
